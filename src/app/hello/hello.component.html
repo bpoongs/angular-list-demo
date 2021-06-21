@@ -1,0 +1,27 @@
+<h3>Movie name is : {{ movieName }}</h3>
+<p>
+    <!-- using string interpolation-->
+    Movie name in text box : <input type='text' value='{{ movieName }}'/>
+</p>
+<p>
+    <!-- property binding - binding a property(movieName) in the component class
+         to the value attribute of the text box -->
+    Movie name in text box : <input type='text' [value]='movieName'/>
+</p>
+<div>
+    <button type='button' (click)='showMovie()'>Click here to view the movie</button>
+    <p>
+        {{ displayMovieName }}
+    </p>
+</div>
+<div>
+    <button 
+        type='button' 
+        (click)='showToggleMovie()'>
+        Click here to toggle the movie
+    </button>
+    <p>
+        {{ toggleMovieName }}
+    </p>
+</div>
+
