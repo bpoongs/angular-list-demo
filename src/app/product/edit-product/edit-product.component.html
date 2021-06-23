@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="card mt-4">
+        <form [formGroup]="editForm" (ngSubmit)="editProduct()"> <!-- this will not submit the form-->
+        <div class="card-header bg-success text-white display-4">
+            Edit Product Form
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="productId">Product ID:</label>
+                <input 
+                    type="text" 
+                    class="form-control mx-2" 
+                    id="productId"
+                    name="productId"
+                    formControlName="productId">
+            </div>
+            <div class="form-group">
+                <label for="productName">Product Name:*</label>
+                <input 
+                    type="text" 
+                    class="form-control mx-2" 
+                    id="productName"
+                    name="productName"
+                    formControlName="productName">
+                <span 
+                    *ngIf="editForm.get('productName')?.touched && editForm.get('productName')?.errors?.required"
+                    class="text-danger small">
+                    Product name is mandatory!
+                </span>
+                <span 
+                    *ngIf="editForm.get('productName')?.touched && editForm.get('productName')?.errors?.minlength"
+                    class="text-danger small">
+                    Product name should be minimum of 3 characters!
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="productCost">Product Cost:</label>
+                <input 
+                    type="type" 
+                    class="form-control mx-2" 
+                    id="productCost"
+                    name="productCost"
+                    formControlName="productCost">
+            </div>
+            <div class="form-group">
+                <label for="productDescription">Product Description:</label>
+                <input 
+                    type="type" 
+                    class="form-control mx-2" 
+                    id="productDescription"
+                    name="productDescription"
+                    formControlName="productDescription">
+            </div>
+            <div class="form-group">
+                <label for="productImageUrl">Product Image URL:</label>
+                <input 
+                    type="type" 
+                    class="form-control mx-2" 
+                    id="productImageUrl"
+                    name="productImageUrl"
+                    formControlName="productImageUrl">            
+            </div>
+        </div>
+        <div class="card-footer">
+            <button 
+                type="submit" 
+                class="btn btn-success"
+                [disabled]="!editForm.valid">Edit Product</button>
+        </div>
+        </form>
+    </div>
+    </div>
+form group value : {{ editForm.value | json}}
+<br>
+form group status : {{ editForm.status }}
+<br>
+product name value : {{ editForm.get('productName')?.value }}
+<br>
+product name status : {{ editForm.get('productName')?.status }}
+<br>
+product name valid : {{ editForm.get('productName')?.valid }}
+<br>
+product name touched : {{ editForm.get('productName')?.touched }}
+<br>
+product name dirty : {{ editForm.get('productName')?.dirty }}

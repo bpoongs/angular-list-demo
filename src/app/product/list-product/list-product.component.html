@@ -1,0 +1,35 @@
+<div class="container">
+    <p class='display-4'>{{ title }}</p>
+    <button 
+        type='button' 
+        class='btn btn-success my-2'
+        (click)='goToAdd()'>+</button>
+
+    <ul class="list-group mt-3">
+        <li 
+            class="list-group-item" 
+            *ngFor="let product of allProducts">
+            <div class='d-flex justify-content-between'>
+                <div>
+                    <img [src]="product.productImageUrl" width="10%"/>
+                    {{ product.productName }} 
+                </div>
+                <div>
+                    Rs. {{ product.productCost }}
+                    <button 
+                        type='button' 
+                        class='btn btn-warning ml-3'
+                        (click)='editProduct(product.productId)'>
+                        Edit
+                    </button>
+                    <button 
+                        type='button' 
+                        class='btn btn-danger ml-3'
+                        (click)='deleteProduct(product.productId)'>
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

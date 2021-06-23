@@ -1,0 +1,83 @@
+<div class="container">
+<div class="card mt-4">
+    <!-- <form (submit)="addProduct()"> -->
+    <form #myForm="ngForm" (ngSubmit)="addProduct(myForm)"> <!-- this will not submit the form-->
+    <div class="card-header bg-success text-white display-4">
+        Add Product Form
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="productName">Product Name:*</label>
+            <input 
+                type="text" 
+                class="form-control mx-2" 
+                placeholder="Enter product name" 
+                id="productName"
+                name="productName" 
+                required
+                minlength="3"
+                maxlength="15"
+                #myProdName="ngModel"
+                [(ngModel)]="addProductData.productName">
+            <span *ngIf="myProdName.touched && myProdName.errors?.required" class="text-danger small" >
+                Product Name is mandatory!
+            </span>
+            <span *ngIf="myProdName.touched && myProdName.errors?.minlength" class="text-danger small" >
+                Product Name should be minimum of 3 characters!
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="productCost">Product Cost:</label>
+            <input 
+                type="type" 
+                class="form-control mx-2" 
+                placeholder="Enter product cost" 
+                id="productCost"
+                name="productCost"
+                [(ngModel)]="addProductData.productCost">
+        </div>
+        <div class="form-group">
+            <label for="productDescription">Product Description:</label>
+            <input 
+                type="type" 
+                class="form-control mx-2" 
+                placeholder="Enter product description" 
+                id="productDescription"
+                name="productDescription"
+                [(ngModel)]="addProductData.productDescription">
+        </div>
+        <div class="form-group">
+            <label for="productImageUrl">Product Image URL:</label>
+            <input 
+                type="type" 
+                class="form-control mx-2" 
+                placeholder="Enter product image url" 
+                id="productImageUrl"
+                name="productImageUrl"
+                [(ngModel)]="addProductData.productImageUrl">            
+        </div>
+    </div>
+    <div class="card-footer">
+        <button 
+            type="submit" 
+            class="btn btn-success"
+            [disabled]="!myForm.valid">Add Product</button>
+    </div>
+    </form>
+</div>
+</div>
+{{ myForm.value | json }}
+<br>
+Product Name status : {{ myProdName.status }}
+<br>
+Product Name valid : {{ myProdName.valid }}
+<br>
+Product Name invalid : {{ myProdName.invalid }}
+<br>
+Product Name touched : {{ myProdName.touched }}
+<br>
+Product Name dirty : {{ myProdName.dirty }}
+<br>
+Product Name errors required : {{ myProdName.errors?.required }}
+<br>
+Product Name errors minlength : {{ myProdName.errors?.minlength }}
