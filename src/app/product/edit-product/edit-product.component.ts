@@ -31,14 +31,18 @@ export class EditProductComponent implements OnInit {
   ngOnInit(): void {
     let productId: any = this.activatedRoute.snapshot.paramMap.get('prodId');
 
-    let product: Product = this.productService.getProduct(productId);
-    this.editForm.setValue(product);
+    this.productService.getProduct(productId).subscribe((product) => {
+      this.editForm.setValue(product);
+    });
+    
   }
 
   editProduct(){
     console.log(this.editForm);
-    let allProducts = this.productService.updateProduct(this.editForm.value);
-    console.log(allProducts);
-    this.router.navigate(['list-product']);
+    this.productService.updateProduct(this.editForm.value).subscribe((response) => {
+      console.log(response);
+      this.router.navigate(['list-product']);
+    });
+    
   }
 }

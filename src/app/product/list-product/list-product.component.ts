@@ -15,17 +15,34 @@ export class ListProductComponent implements OnInit {
   allProducts: Product[] = [];  
   //productService: ProductService;
 
+  myError = '';
   constructor(private productService: ProductService, private router: Router) {
     //this.productService = productService;
    }
 
   ngOnInit(): void {
-    this.allProducts = this.productService.getAllProducts();
+    this.productService.getAllProducts().subscribe((response) => {
+      console.log(response);
+      this.allProducts = response;
+    },
+    (error) => {
+      console.log(error.error.message);
+      this.myError = error.error.message;
+    });
+    console.log("this is after the asynchronous call");
   }
 
   deleteProduct(prodId: number){
     console.log(prodId);
-    this.productService.deleteProduct(prodId);
+    this.productService.deleteProduct(prodId).subscribe((response) => {
+      console.log(response);
+      this.allProducts = response;
+    },
+    (error) => {
+      console.log(error.error.message);
+      this.allProducts = [];
+      this.myError = error.error.message;
+    });
   }
 
   editProduct(prodId: number){

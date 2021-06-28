@@ -33,9 +33,11 @@ export class AddProductComponent implements OnInit {
       productImageUrl: this.addProductData.productImageUrl
     }
     //this.allProducts.push(myProduct);
-    let allProducts = this.productService.addProduct(myProduct);
-    console.log(allProducts);
+    this.productService.addProduct(myProduct).subscribe((response) => {
+      console.log(response);
+      this.router.navigate(['list-product']);
+    });
 
-    this.router.navigate(['list-product']);
+    
   }
 }
